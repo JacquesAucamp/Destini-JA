@@ -10,10 +10,37 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+	@IBOutlet weak var storyLabel: UILabel!
+	@IBOutlet weak var choice1Button: UIButton!
+	@IBOutlet weak var choice2Button: UIButton!
+	
+	var storyBrain = StoryBrain()
+		
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		
+		storyLabel.contentMode = .scaleToFill
+		storyLabel.numberOfLines = 0
+		
+		UpdateUI()
+	}
+	
+	@IBAction func choiceMade(_ sender: UIButton) {
+		let userAnswer = sender.currentTitle!
+		print(userAnswer)
+		
+		storyBrain.nextStory(userAnswer)
+		
+		UpdateUI()
+	}
+	
+	func UpdateUI() {
+		storyLabel.text = storyBrain.getStoryLabelText()
+		choice1Button.setTitle(storyBrain.getChoice1Button(), for: .normal)
+		choice2Button.setTitle(storyBrain.getChoice2Button(), for: .normal)
+	}
+	
 
-    }
 
 
 }
